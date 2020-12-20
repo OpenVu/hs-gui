@@ -500,6 +500,15 @@ if test x"$withgraphlcd" != xno ; then
 fi
 AM_CONDITIONAL(HAVE_GRAPHLCD, test x"$withgraphlcd" != xno)
 
+AC_ARG_WITH(lcd,
+	AC_HELP_STRING([--with-lcd], [use LCD display, yes or no]),
+	[[withlcd=$withval]],
+	[[withlcd=no]]
+)
+if ! test x"$withlcd" != xno ; then
+	AC_DEFINE(NO_LCD, 1,[Define when not using a LCD display device])
+fi
+AM_CONDITIONAL(NO_LCD, test x"$withlcd" != xno)
 
 if test `echo "$BOXTYPE" | cut -b 1-7` == "mbmicro"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
